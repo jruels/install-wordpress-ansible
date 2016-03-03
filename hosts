@@ -1,11 +1,12 @@
 [apps]
-app1
+app01
+app02
 
 [dbs]
-db1
+db01
 
 [lbs]
-lb1
+lb01
 
 [apps:vars]
 server_role=app
