@@ -3,7 +3,7 @@
 common_packages:
     - vim
     - screen
-    - sudo 
+    - sudo
     - htop
     - strace
     - curl
@@ -14,9 +14,9 @@ common_user: True
 common_swap: True
 
 # common_user variables
-common_users: 
-  - name: hussein
-    key: "{{ lookup('file', 'hussein.pub') }}"
+#common_users:
+#  - name: jruels
+#    key: "{{ lookup('file', '') }}"
 
 # common_swap variables
 swap_size: 512
