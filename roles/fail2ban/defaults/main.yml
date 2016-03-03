@@ -1,4 +1,4 @@
 fail2ban_bantime: 600
 fail2ban_findtime: 600
 fail2ban_maxretry: 3
-fail2ban_destmail: hussein@test.com
+fail2ban_destmail: email@test.com
