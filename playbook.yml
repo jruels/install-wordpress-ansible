@@ -11,7 +11,7 @@
     - { role: openssh, tags: ["openssh"] }
     - { role: fail2ban, tags: ["fail2ban"] }
     - { role: rkhunter, tags: ["rkhunter"] }
-    - { role: iptables, tags: ["iptables"] }
+#    - { role: iptables, tags: ["iptables"] }
 
 # Load Balancer(s) roles
 - hosts: lbs
@@ -26,11 +26,11 @@
     - { role: nginx, tags: ["nginx"] }
     - { role: php5, tags: ["php5"] }
     - { role: hhvm, tags: ["hhvm"] }
-  
+
 # Database Server(s) roles
 - hosts: dbs
   sudo: yes
-  vars_files: 
+  vars_files:
       - group_vars/passwords.yml
   roles:
     - { role: mysql, tags: ["mysql"] }
@@ -38,7 +38,7 @@
 # Installing the application on servers
 - hosts: all
   sudo: yes
-  vars_files: 
+  vars_files:
       - group_vars/passwords.yml
   handlers:
       - include: roles/hhvm/handlers/main.yml
