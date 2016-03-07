@@ -2,6 +2,8 @@
 - hosts: localhost
   connection: local
   gather_facts: false
+  vars:
+    api_token: b9095fee1035a2551362608de97d30145b848a82da0498428039ec4948f2e971
 
  # Create Load Balancer droplets
   tasks:
