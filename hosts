@@ -6,7 +6,7 @@ app02
 db01
 
 [lbs]
-lb01
+lb01 ansible_host=127.0.0.1 ansible_user=vagrant ansible_pass=vagrant ansible_port=2222
 
 [apps:vars]
 server_role=app
