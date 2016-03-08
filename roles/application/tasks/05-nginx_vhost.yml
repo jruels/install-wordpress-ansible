@@ -14,3 +14,8 @@
   notify:
       - Restart Nginx
 
+#Remove default debian index.html
+- file path=/var/www/html/index.nginx-debian.html state=absent
+
+#Remove nginx default config
+- file path=/etc/nginx/sites-enabled/default state=absent

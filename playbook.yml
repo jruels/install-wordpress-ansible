@@ -48,3 +48,7 @@
   roles:
     - { role: application, tags: ["application"] }
     - { role: backup, tags: ["backup"] }
+
+    task:
+      - name: Restart haproxy
+        service: name=haproxy state=restarted
