@@ -1,6 +1,6 @@
 ---
 #Provision Droplets
-#- include: droplets.yml
+- include: droplets.yml
 
 # Common tasks
 - hosts: all
@@ -11,7 +11,7 @@
     - { role: openssh, tags: ["openssh"] }
     - { role: fail2ban, tags: ["fail2ban"] }
     - { role: rkhunter, tags: ["rkhunter"] }
-#    - { role: iptables, tags: ["iptables"] }
+    - { role: iptables, tags: ["iptables"] }
 
 # Load Balancer(s) roles
 - hosts: lbs

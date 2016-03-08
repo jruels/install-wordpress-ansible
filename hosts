@@ -1,12 +1,11 @@
 [apps]
-app01
-app02
+app01 ansible_user=root ansible_host=159.203.236.6
 
 [dbs]
-db01
+db01 ansible_user=root ansible_host=198.199.111.69
 
 [lbs]
-lb01 ansible_host=127.0.0.1 ansible_user=vagrant ansible_pass=vagrant ansible_port=2222
+lb01 ansible_user=root ansible_host=159.203.249.216
 
 [apps:vars]
 server_role=app

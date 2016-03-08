@@ -12,7 +12,7 @@
         state: present
         command: droplet
         name: lb1
-#        api_token: b9095fee1035a2551362608de97d30145b848a82da0498428039ec4948f2e971
+#        api_token: :
         private_networking: yes
         size_id: 512mb
         image_id: ubuntu-14-04-x64

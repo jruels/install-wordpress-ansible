@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  vars: 
+    droplets:
+    - lb1
+    - app1
+    - db1
+  tasks:
+
+  - name: delete droplets
+    digital_ocean: >
+      state=absent
+      command=droplet
+      name={{ item }}
+      unique_name=yes
+      size_id=512mb
+      region_id=sgp1
+      image_id=ubuntu-14-04-x64
+    with_items: droplets
