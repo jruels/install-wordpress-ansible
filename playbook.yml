@@ -1,6 +1,6 @@
 ---
 #Provision Droplets
-- include: droplets.yml
+#- include: droplets.yml
 
 # Common tasks
 - hosts: all

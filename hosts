@@ -1,11 +1,11 @@
 [apps]
-app01 ansible_user=root ansible_host=159.203.236.6
+app01 ansible_host=198.199.115.5 ansible_user=root
 
 [dbs]
-db01 ansible_user=root ansible_host=198.199.111.69
+db01 ansible_host=198.199.101.99 ansible_user=root
 
 [lbs]
-lb01 ansible_user=root ansible_host=159.203.249.216
+lb01 ansible_host=192.241.197.7 ansible_user=root
 
 [apps:vars]
 server_role=app
