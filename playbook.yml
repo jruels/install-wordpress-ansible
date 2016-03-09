@@ -53,4 +53,4 @@
   sudo: yes
   tasks:
      - name: Restart haproxy
-       service: name=haproxy
+       service: name=haproxy state=restarted
