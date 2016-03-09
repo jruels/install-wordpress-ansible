@@ -1,5 +1,4 @@
 *.cache
 env
 roles/common/files/*.pub
-Vagrantfile
 .vagrant/
