@@ -54,3 +54,9 @@
   tasks:
      - name: Restart haproxy
        service: name=haproxy state=restarted
+
+- hosts: apps
+  sudo: yes
+  tasks:
+     - name: Restart nginx
+       service: name=nginx state=restarted
