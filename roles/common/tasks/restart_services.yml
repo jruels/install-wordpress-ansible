@@ -1,0 +1,4 @@
+---
+- name: Restart haproxy and nginx
+  service: name=haproxy state=restarted
+  with_items: "groups['lbs']"
