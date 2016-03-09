@@ -1,8 +1,8 @@
 ---
 galaxy_info:
-  author: slash4
-  description: Install a high available, scalable wordpress cluster. Beta Test!
-  company: slash4
+  author: aslaen
+  description: Install a high available, scalable wordpress cluster.
+  company: aslaen
   license: MIT
   min_ansible_version: 1.9
   platforms:

@@ -9,8 +9,6 @@
   roles:
     - { role: common, tags: ["common"] }
     - { role: openssh, tags: ["openssh"] }
-    - { role: fail2ban, tags: ["fail2ban"] }
-    - { role: rkhunter, tags: ["rkhunter"] }
     - { role: iptables, tags: ["iptables"] }
 
 # Load Balancer(s) roles
@@ -49,14 +47,14 @@
     - { role: application, tags: ["application"] }
     - { role: backup, tags: ["backup"] }
 
-- hosts: lbs
-  sudo: yes
-  tasks:
-     - name: Restart haproxy
-       service: name=haproxy state=restarted
+#- hosts: lbs
+#  sudo: yes
+#  tasks:
+#     - name: Restart haproxy
+#       service: name=haproxy state=restarted
 
-- hosts: apps
-  sudo: yes
-  tasks:
-     - name: Restart nginx
-       service: name=nginx state=restarted
+#- hosts: apps
+#  sudo: yes
+#  tasks:
+#     - name: Restart nginx
+##       service: name=nginx state=restarted

@@ -6,12 +6,13 @@ define('DB_PASSWORD', '{{ db_password }}');
 define('DB_HOST', 'db01');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
+define ('WPLANG', 'en_GB');
 
 {{ lookup('file', 'wp_salts.txt') }}
 
 $table_prefix  = 'wp_';
 
-define('WP_DEBUG', false);
+define('WP_DEBUG', true);
 
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
