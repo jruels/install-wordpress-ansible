@@ -47,14 +47,20 @@
     - { role: application, tags: ["application"] }
     - { role: backup, tags: ["backup"] }
 
-#- hosts: lbs
-#  sudo: yes
-#  tasks:
-#     - name: Restart haproxy
-#       service: name=haproxy state=restarted
+- hosts: lbs
+  sudo: yes
+  tasks:
+     - name: Restart haproxy
+       service: name=haproxy state=restarted
 
-#- hosts: apps
-#  sudo: yes
-#  tasks:
-#     - name: Restart nginx
-##       service: name=nginx state=restarted
+- hosts: apps
+  sudo: yes
+  tasks:
+     - name: Restart nginx
+       service: name=nginx state=restarted
+
+- hosts: apps
+  sudo: yes
+  tasks:
+     - name: Restart hhvm
+       service: name=hhvm state=restarted
