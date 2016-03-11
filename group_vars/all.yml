@@ -7,7 +7,10 @@ app_name: "solinea"
 app_site: "solinea.com"
 app_user: "www-data"
 app_dir: /var/www/html
-
+wordpress_site_title: "Solinea Training"
+wordpress_admin_user: "admin"
+wordpress_admin_user_pass: "Solinea"
+wordpress_admin_email: example@mail.com
 #dbs
 db_name: wordpress
 db_user: wpuser
