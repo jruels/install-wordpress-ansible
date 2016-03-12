@@ -1,14 +1,59 @@
 ---
 
+- name: Is WP-CLI downloaded?
+  stat: path="/usr/local/bin/wp"
+  register: wpcli_is_downloaded
+
+- name: Download WP-CLI
+#  shell: curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+  get_url:
+    url: https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    dest: /usr/local/bin/wp
+    mode: 0655
+  when: wpcli_is_downloaded.stat.exists == False
+
+- name: Make WP-CLI executable
+  file:
+    path: /usr/loca/bin/wp-cli.phar
+    mode: u=rwx,g=rx,o=rx
+  when: wpcli_is_downloaded.stat.exists == False
+
 - name: Download Wordpress to application dir
   get_url: url=https://wordpress.org/latest.tar.gz dest=/tmp/latest.tar.gz mode=0644
 
-- name: Unarchive Wordpress
-  command: chdir={{app_dir}} creates={{app_dir}}/index.php tar --strip 1 -xvzf /tmp/latest.tar.gz
+- name: Is WordPress downloaded?
+  stat: path="{{app_dir}}/index.php"
+  register: wordpress_is_downloaded
 
-- name: Change app dir permissions
-  file: recurse=yes path={{app_dir}} owner={{app_user}} group={{app_user}} state=directory
+- name: Download WordPress
+  shell: /usr/local/bin/wp core download
+  args:
+    chdir: "{{app_dir}}"
+  when: wordpress_is_downloaded.stat.exists == False
 
-- name: configure wordpress
-  template: src=wp-config.php.j2 dest={{app_dir}}/wp-config.php owner={{app_user}} group={{app_user}}
-  notify: Restart hhvm
+- name: Configure WordPress
+  shell: /usr/local/bin/wp core config
+           --path="{{app_dir}}"
+           --dbhost="{{db_address}}"
+           --dbname="{{db_name}}"
+           --dbuser="{{db_user}}"
+           --dbpass="{{db_password}}"
+  when: wordpress_is_downloaded.stat.exists == False
+
+- name: Is WordPress installed?
+  shell: /usr/local/bin/wp core is-installed
+  args:
+    chdir: "{{app_dir}}/"
+  register: wordpress_is_installed
+  ignore_errors: True
+
+- name: Install WordPress tables
+  sudo: yes
+  shell: /usr/local/bin/wp core install
+            --path="{{app_dir}}"
+            --url="{{ wordpress_home_url }}"
+            --title="{{ wordpress_site_title }}"
+            --admin_user="{{ wordpress_admin_user }}"
+            --admin_password="{{ wordpress_admin_user_pass }}"
+            --admin_email="{{ wordpress_admin_email }}"
+  when: wordpress_is_installed|failed
