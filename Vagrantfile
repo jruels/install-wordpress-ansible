@@ -26,6 +26,16 @@ Vagrant.configure("2") do |config|
       end
   end
 
+config.vm.define "db01" do |db|
+    db.vm.box = "ubuntu/trusty64"
+    db.vm.hostname = "db01"
+    db.vm.network "private_network", ip: "192.168.33.50"
+    db.vm.network "forwarded_port", guest: 80, host: 8080
+    db.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+     end
+
   # Create some app servers
   (1..2).each do |i|
     config.vm.define "app0#{i}" do |node|
@@ -37,22 +47,13 @@ Vagrant.configure("2") do |config|
           vb.memory = "256"
         end
     end
-	config.vm.synced_folder ".", "/root/wp-install"
+#	config.vm.synced_folder ".", "/root/wp-install"
   end
 
-  config.vm.define "db01" do |db|
-    db.vm.box = "ubuntu/trusty64"
-    db.vm.hostname = "db01"
-    db.vm.network "private_network", ip: "192.168.33.50"
-    db.vm.network "forwarded_port", guest: 80, host: 8080
-    db.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
-    end
-     end
-     config.vm.provision "ansible" do |ansible|
-        ansible.verbose = "v"
-        ansible.limit="all"
-        ansible.playbook = "playbook.yml"
+       config.vm.provision "ansible" do |ansible|
+    #    ansible.verbose = "vvv"
+    #    ansible.limit="all"
+        ansible.playbook = "minimal.yml"
         ansible.vault_password_file = "./vault_pass.txt"
    #     ansible.inventory_path = "./hosts"
         ansible.groups = {

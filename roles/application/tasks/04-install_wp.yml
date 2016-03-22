@@ -1,5 +1,8 @@
 ---
 
+- name: Install MySQL client for WP-CLI
+  apt: name=mysql-client state=present update_cache=yes
+
 - name: Is WP-CLI downloaded?
   stat: path="/usr/local/bin/wp"
   register: wpcli_is_downloaded
@@ -14,7 +17,7 @@
 
 - name: Make WP-CLI executable
   file:
-    path: /usr/loca/bin/wp-cli.phar
+    path: /usr/local/bin/wp
     mode: u=rwx,g=rx,o=rx
   when: wpcli_is_downloaded.stat.exists == False
 
@@ -26,13 +29,13 @@
   register: wordpress_is_downloaded
 
 - name: Download WordPress
-  shell: /usr/local/bin/wp core download
+  shell: /usr/local/bin/wp core download --allow-root
   args:
     chdir: "{{app_dir}}"
   when: wordpress_is_downloaded.stat.exists == False
 
 - name: Configure WordPress
-  shell: /usr/local/bin/wp core config
+  shell: /usr/local/bin/wp core config --allow-root
            --path="{{app_dir}}"
            --dbhost="{{db_address}}"
            --dbname="{{db_name}}"
@@ -41,7 +44,7 @@
   when: wordpress_is_downloaded.stat.exists == False
 
 - name: Is WordPress installed?
-  shell: /usr/local/bin/wp core is-installed
+  shell: /usr/local/bin/wp core is-installed --allow-root
   args:
     chdir: "{{app_dir}}/"
   register: wordpress_is_installed
@@ -49,7 +52,7 @@
 
 - name: Install WordPress tables
   sudo: yes
-  shell: /usr/local/bin/wp core install
+  shell: /usr/local/bin/wp core install --allow-root
             --path="{{app_dir}}"
             --url="{{ wordpress_home_url }}"
             --title="{{ wordpress_site_title }}"

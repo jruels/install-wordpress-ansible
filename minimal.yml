@@ -1,0 +1,8 @@
+# Common tasks
+- hosts: all
+  gather_facts: True
+  sudo: yes
+  tasks:
+
+  - name: Install needed packages
+    apt: name=vim-nox state=present update_cache=yes
