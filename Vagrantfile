@@ -49,6 +49,7 @@ Vagrant.configure("2") do |config|
       vb.memory = "1024"
     end
      end
+
      config.vm.provision "ansible" do |ansible|
         ansible.verbose = "v"
         ansible.limit="all"
